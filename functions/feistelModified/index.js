@@ -1,6 +1,6 @@
-const Helper = require("../helper")
+import { Helper } from "../helper"
 
-class FeistelModified {
+export class FeistelModified {
   constructor() {
     this.expansionMatrix = [
       32, 1, 2, 3, 4, 5,
@@ -130,7 +130,8 @@ class FeistelModified {
     let i = 0
     for (const a of blockA) {
       const row = Helper.binaryToNumber(a[0].toString + a[5].toString)
-      const col = Helper.binaryToNumber(a[1:5])
+      let col = a
+      col = a.shift().pop()
       const value = Helper.numberToBinary(this.s_box[i++][row][col])
       output += value.slice(-4)
     }
